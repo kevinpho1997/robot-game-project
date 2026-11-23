@@ -1,6 +1,11 @@
+function setupPlayerMovement () {
+    controller.moveSprite(playerSprite, 100, 100)
+}
+let playerSprite: Sprite = null
 scene.setBackgroundImage(assets.image`background`)
-let playerSprite = sprites.create(assets.image`playerDrone`, SpriteKind.Player)
+playerSprite = sprites.create(assets.image`playerDrone`, SpriteKind.Player)
 playerSprite.setScale(0.6, ScaleAnchor.Middle)
+setupPlayerMovement()
 let enemyList = [
 assets.image`normalRock`,
 assets.image`triangleRock`,
