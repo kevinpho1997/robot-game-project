@@ -1,3 +1,29 @@
+namespace SpriteKind {
+    export const Laser = SpriteKind.create()
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    laserVx = 0
+    laserVy = 0
+    if (droneDirection == 0) {
+        laserVx = 150
+    } else if (droneDirection == 1) {
+        laserVy = 150
+    } else if (droneDirection == 2) {
+        laserVx = -150
+    } else {
+        laserVy = -150
+    }
+    if (droneDirection == 0 || droneDirection == 2) {
+        laser = sprites.createProjectileFromSprite(assets.image`miningLaserX`, playerSprite, laserVx, laserVy)
+    } else {
+        laser = sprites.createProjectileFromSprite(assets.image`miningLaserY`, playerSprite, laserVx, laserVy)
+    }
+    laser.setKind(SpriteKind.Laser)
+})
+sprites.onOverlap(SpriteKind.Laser, SpriteKind.Enemy, function (laser, enemy) {
+    laser.destroy()
+    enemy.destroy()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (!(invincible)) {
         info.changeLifeBy(-1)
@@ -17,6 +43,10 @@ let enemySpeedMax = 0
 let enemySpeedMin = 0
 let enemy: Sprite = null
 let invincible = false
+let laser: Sprite = null
+let droneDirection = 0
+let laserVy = 0
+let laserVx = 0
 let playerSprite: Sprite = null
 scene.setBackgroundImage(assets.image`background`)
 playerSprite = sprites.create(assets.image`playerDroneUp`, SpriteKind.Player)
@@ -46,14 +76,18 @@ game.onUpdate(function () {
         if (Math.abs(playerSprite.vx) > Math.abs(playerSprite.vy)) {
             if (playerSprite.vx > 0) {
                 playerSprite.setImage(playerDirections[0])
+                droneDirection = 0
             } else {
                 playerSprite.setImage(playerDirections[2])
+                droneDirection = 2
             }
         } else {
             if (playerSprite.vy > 0) {
                 playerSprite.setImage(playerDirections[1])
+                droneDirection = 1
             } else {
                 playerSprite.setImage(playerDirections[3])
+                droneDirection = 3
             }
         }
     }

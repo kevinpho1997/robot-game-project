@@ -64,6 +64,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "normalRock"
     },
+    "image14": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJmZmZmZmZmZmZmZmZmZmZkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "miningLaserY"
+    },
+    "image15": {
+        "data": "hwQQABAAAAAAAACQCQAAAAAAAJAJAAAAAAAAkAkAAAAAAACQCQAAAAAAAJAJAAAAAAAAkAkAAAAAAACQCQAAAAAAAJAJAAAAAAAAkAkAAAAAAACQCQAAAAAAAJAJAAAAAAAAkAkAAAAAAACQCQAAAAAAAJAJAAAAAAAAkAkAAAAAAACQCQAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "miningLaserX"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
