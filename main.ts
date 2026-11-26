@@ -1,15 +1,27 @@
-function setupPlayerMovement () {
-    controller.moveSprite(playerSprite, 100, 100)
-}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    if (!(invincible)) {
+        info.changeLifeBy(-1)
+        invincible = true
+        otherSprite.destroy()
+        for (let index = 0; index < 5; index++) {
+            playerSprite.setFlag(SpriteFlag.Invisible, true)
+            pause(100)
+            playerSprite.setFlag(SpriteFlag.Invisible, false)
+            pause(100)
+        }
+        invincible = false
+    }
+})
 let side = 0
 let enemySpeedMax = 0
 let enemySpeedMin = 0
 let enemy: Sprite = null
+let invincible = false
 let playerSprite: Sprite = null
 scene.setBackgroundImage(assets.image`background`)
 playerSprite = sprites.create(assets.image`playerDroneUp`, SpriteKind.Player)
 playerSprite.setScale(0.6, ScaleAnchor.Middle)
-setupPlayerMovement()
+controller.moveSprite(playerSprite, 100, 100)
 let enemyList = [
 assets.image`normalRock`,
 assets.image`triangleRock`,
@@ -28,6 +40,7 @@ assets.image`playerDroneDown`,
 assets.image`playerDroneLeft`,
 assets.image`playerDroneUp`
 ]
+info.setLife(3)
 game.onUpdate(function () {
     if (playerSprite.vx != 0 || playerSprite.vy != 0) {
         if (Math.abs(playerSprite.vx) > Math.abs(playerSprite.vy)) {
@@ -45,7 +58,7 @@ game.onUpdate(function () {
         }
     }
 })
-game.onUpdateInterval(3000, function () {
+game.onUpdateInterval(1000, function () {
     enemy = sprites.create(enemyList[randint(0, enemyList.length - 1)], SpriteKind.Enemy)
     enemy.setScale(0.3, ScaleAnchor.Middle)
     enemySpeedMin = 10
