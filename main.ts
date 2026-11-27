@@ -32,6 +32,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         laser = sprites.createProjectileFromSprite(assets.image`miningLaserY`, playerSprite, laserVx, laserVy)
     }
     laser.setKind(SpriteKind.Laser)
+    music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
 })
 sprites.onOverlap(SpriteKind.Laser, SpriteKind.Enemy, function (laser, enemy) {
     tempIndex = spawnedRocks.indexOf(enemy)
