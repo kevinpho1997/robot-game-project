@@ -34,12 +34,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     laser.setKind(SpriteKind.Laser)
 })
 sprites.onOverlap(SpriteKind.Laser, SpriteKind.Enemy, function (laser, enemy) {
-    index = spawnedRocks.indexOf(enemy)
-    if (index >= 0) {
-        ore = sprites.create(oreList[rockOreIndices[index]], SpriteKind.Ore)
+    tempIndex = spawnedRocks.indexOf(enemy)
+    if (tempIndex >= 0) {
+        ore = sprites.create(oreList[rockOreIndices[tempIndex]], SpriteKind.Ore)
         ore.setPosition(enemy.x, enemy.y)
-        spawnedRocks.removeAt(index)
-        rockOreIndices.removeAt(index)
+        spawnedRocks.removeAt(tempIndex)
+        rockOreIndices.removeAt(tempIndex)
     }
     laser.destroy()
     enemy.destroy()
@@ -49,7 +49,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         info.changeLifeBy(-1)
         invincible = true
         otherSprite.destroy()
-        for (let index2 = 0; index2 < 5; index2++) {
+        for (let index = 0; index < 5; index++) {
             playerSprite.setFlag(SpriteFlag.Invisible, true)
             pause(100)
             playerSprite.setFlag(SpriteFlag.Invisible, false)
@@ -67,7 +67,7 @@ let invincible = false
 let rockOreIndices: number[] = []
 let ore: Sprite = null
 let spawnedRocks: Sprite[] = []
-let index = 0
+let tempIndex = 0
 let laser: Sprite = null
 let droneDirection = 0
 let laserVy = 0
