@@ -2,6 +2,18 @@ namespace SpriteKind {
     export const Laser = SpriteKind.create()
     export const Ore = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ore, function (sprite, otherSprite) {
+    if (otherSprite.image.equals(assets.image`normalOre`)) {
+        info.changeScoreBy(10)
+    } else if (otherSprite.image.equals(assets.image`ore3`)) {
+        info.changeScoreBy(20)
+    } else if (otherSprite.image.equals(assets.image`ore2`)) {
+        info.changeScoreBy(30)
+    } else if (otherSprite.image.equals(assets.image`ore1`)) {
+        info.changeScoreBy(40)
+    }
+    sprites.destroy(otherSprite)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     laserVx = 0
     laserVy = 0
@@ -85,6 +97,7 @@ assets.image`playerDroneLeft`,
 assets.image`playerDroneUp`
 ]
 info.setLife(3)
+info.startCountdown(60)
 game.onUpdate(function () {
     if (playerSprite.vx != 0 || playerSprite.vy != 0) {
         if (Math.abs(playerSprite.vx) > Math.abs(playerSprite.vy)) {
